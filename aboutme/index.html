@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="./../static/js/htmx.min.js"></script>
+    <title>About</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+               <span></span>
+            <div class="name_alias_box">
+                Leyuskc
+            </div>
+               <span></span>
+            <div class="small_pix">
+                <img src="./../static/img/side_pp.jpeg" alt="Profile Picture of the `Leyuskc`" class="sidebar_pix">
+            </div>
+
+           <span></span>
+
+            <div class="clickable" id="1" hx-swap hx-get="./profile.html" hx-trigger="click" hx-target=".content"
+                hx-hover="pointer">
+                <p>
+                    Profile
+                </p>
+            </div>
+            <div class="hori_line">
+                <hr>
+            </div>
+            
+            <div class="clickable" id="2">
+                <p>
+                    Github
+                </p>
+            </div>
+            <div class="hori_line">
+                <hr>
+            </div>
+            
+            <div class="clickable" id="3">
+                <p>
+                    HackerRank
+                </p>
+            </div>
+           <div class="hori_line">
+                <hr>
+            </div>
+            
+            <div class="clickable" id="4">
+                <p>
+                    Others
+                </p>
+            </div>
+            <div class="hori_line">
+                <hr>
+            </div>
+            
+        </div>
+        <div class="content-holder">
+            <div class="content-title">
+                <h1>Profile</h1>
+            </div>
+            <div class="content">
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
