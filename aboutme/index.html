@@ -147,7 +147,7 @@
             content_div.appendChild(repo_dom)
             repo_doms.push(repo_dom)
         }
-        toggle_sidebar();
+         side_bar_adjust();
     }
     repos_update = () => {
         if (all_repos.length === undefined) {
@@ -181,7 +181,8 @@
         sidebar_toggel ^= 1;
         document.querySelector(".hamburger").innerHTML=ham_array[sidebar_toggel]
     }
-    window.onresize = ()=>{
+
+    let side_bar_adjust = ()=>{
         if(window.innerWidth>=750){
             sidebar_toggel=1;
             document.querySelector(".sidebar").style.display = "flex";
@@ -191,6 +192,7 @@
         }
         document.querySelector(".hamburger").innerHTML=ham_array[sidebar_toggel]
     };
+    window.onresize = side_bar_adjust
 </script>
 
 </html>
