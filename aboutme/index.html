@@ -1,75 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <script src="./../static/js/htmx.min.js"></script>
+    <link rel="stylesheet" href="./../static/css/aboutme/style.css">
+    <!-- <script type="module" src="./../static/js/md-block.js"></script> -->
+    <script src="./../static/js/htmx.min.js">
+
+
+    </script>
+    <script>
+        String.prototype.format = String.prototype.format ||
+            function() {
+                "use strict";
+                var str = this.toString();
+                if (arguments.length) {
+                    var t = typeof arguments[0];
+                    var key;
+                    var args = ("string" === t || "number" === t) ?
+                        Array.prototype.slice.call(arguments)
+                        : arguments[0];
+
+                    for (key in args) {
+                        str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+                    }
+                }
+
+                return str;
+            };
+    </script>
     <title>About</title>
 </head>
 
 <body>
     <div class="container">
+        <div class="hamburger" onclick="toggle_sidebar()">
+            ☰
+        </div>
         <div class="sidebar">
-               <span></span>
+            <div></div>
             <div class="name_alias_box">
                 Leyuskc
             </div>
-               <span></span>
+            <div></div>
             <div class="small_pix">
-                <img src="./../static/img/side_pp.jpeg" alt="Profile Picture of the `Leyuskc`" class="sidebar_pix">
+                <img src="./../static/img/side_pp.jpeg" alt="Profile Picture of the `Leyuskc`" class="sidebar_pix"
+                    width="100%" height="100%">
             </div>
 
-           <span></span>
+            <div></div>
 
-            <div class="clickable" id="1" hx-swap hx-get="./profile.html" hx-trigger="click" hx-target=".content"
-                hx-hover="pointer">
+            <div class="clickable" hx-swap hx-get="./profile.html" hx-trigger="click" hx-target=".content">
                 <p>
                     Profile
                 </p>
+                <div class="hori_line">
+                    <hr>
+                </div>
             </div>
-            <div class="hori_line">
-                <hr>
-            </div>
-            
-            <div class="clickable" id="2">
+
+
+            <div class="clickable" onclick="repos_update()">
+                <!-- <div class="clickable" hx-swap hx-get="./github.html" hx-trigger="click" hx-target=".content"> -->
                 <p>
                     Github
                 </p>
+                <div class="hori_line">
+                    <hr>
+                </div>
             </div>
-            <div class="hori_line">
-                <hr>
-            </div>
-            
-            <div class="clickable" id="3">
+
+            <div class="clickable" hx-swap hx-get="./hackerrank.html" hx-trigger="click" hx-target=".content">
                 <p>
                     HackerRank
                 </p>
+                <div class="hori_line">
+                    <hr>
+                </div>
             </div>
-           <div class="hori_line">
-                <hr>
-            </div>
-            
-            <div class="clickable" id="4">
+
+            <div class="clickable" hx-swap hx-get="./others.html" hx-trigger="click" hx-target=".content">
                 <p>
                     Others
                 </p>
+                <div class="hori_line">
+                    <hr>
+                </div>
             </div>
-            <div class="hori_line">
-                <hr>
-            </div>
-            
+
         </div>
         <div class="content-holder">
             <div class="content-title">
                 <h1>Profile</h1>
             </div>
             <div class="content">
-                
+                <div class="profile">
+                    This is profile stuff
+                </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    let api_repoes = "https://api.github.com/users/{user_name}/repos?per_page={per_page}&sort={sort}&page={page}"
+    let api_readme = `https://api.github.com/repos/{user_name}/{repo_name}/readme`
+    let details = {
+        "user_name": "leyuskckiran1510",
+        "repo_name": "",
+        "per_page": 100,
+        "page": 1,
+        "sort": "created"// created, updated, pushed, full_name
+    }
+    // api_repoes = "./sample.json"
+    // api_readme = "./test.json"
+
+    let template_path = "./github.html"
+    let all_repos = {};
+    let template = ""
+    api_readme.format("awd")
+
+    fetch_template = () => {
+        fetch(template_path).then(x => {
+            x.text().then(text => {
+                template = text
+            }).finally(() => {
+                console.log("Template loaded")
+            })
+        }).catch(err => {
+            console.log(err, "Happned")
+        }).finally(() => {
+            console.log("Template Fetch Completed Sucessfully")
+        })
+    }
+
+
+    generate_html = () => {
+        let repo_doms = [];
+        document.querySelector(".content-title").innerHTML = "<h1>GitHub</h1>"
+        let content_div = document.querySelector(".content");
+        content_div.innerHTML = "";
+        for (a of all_repos) {
+            let repo_dom = document.createElement("div");
+            repo_dom.className = "git_repo";
+            repo_dom.innerHTML = template.format(a);
+            content_div.appendChild(repo_dom)
+            repo_doms.push(repo_dom)
+        }
+        toggle_sidebar();
+    }
+    repos_update = () => {
+        if (all_repos.length === undefined) {
+            fetch(api_repoes.format(details)).then(x => {
+                x.text().then(y => {
+                    all_repos = JSON.parse(y)
+                }).catch(err => {
+                    console.log("Couldnot Parse Text from Respnose")
+                })
+            }).catch(x => {
+                console.log(x, "Happned")
+            }).finally(() => {
+                console.log("Fetch Completed")
+            })
+        } else {
+            generate_html();
+        }
+    }
+    /*slowly prefetch some background content*/
+    fetch_template();
+    repos_update();
+    let ham_array = ["☰","✕"]
+    let sidebar_toggel = 0;
+
+
+    let toggle_sidebar = () => {
+        if (sidebar_toggel==0)
+            document.querySelector(".sidebar").style.display = "flex";
+        else
+            document.querySelector(".sidebar").style.display = "none";
+        sidebar_toggel ^= 1;
+        document.querySelector(".hamburger").innerHTML=ham_array[sidebar_toggel]
+    }
+    window.onresize = ()=>{
+        if(window.innerWidth>=750){
+            sidebar_toggel=1;
+            document.querySelector(".sidebar").style.display = "flex";
+        }else{
+            sidebar_toggel=0;
+            document.querySelector(".sidebar").style.display="none";
+        }
+        document.querySelector(".hamburger").innerHTML=ham_array[sidebar_toggel]
+    };
+</script>
 
 </html>
