@@ -65,6 +65,7 @@ hr {
 }
 
 .hori_line {
+
     margin: 0px 15px 0px 0px;
 }
 
@@ -151,14 +152,6 @@ hr {
     background-color: var(--col_b);
 }
 
-/*.git_repo {
-    padding: 5px;
-    max-width: 100%;
-    min-height: 195px;
-    min-width: 200px;
-    word-wrap: break-word;
-    border: solid 1px var(--col_ibg);
-}*/
 
 .git_repo {
     display: flex;
@@ -173,14 +166,63 @@ hr {
     align-items: stretch;
 }
 
-/*.git_repo>.top_part{
-    max-width: 10em;
-}*/
+.git_repo>*>*>.title {
+    font-size: 1.3rem;
+    padding: 10px 0px 0px 5px;
+    text-transform: uppercase;
+}
 
-.repo_misc {
+.git_repo>*>*>.title>a {
+    color: #af8eff;
+}
+
+*{
+    font-family: monospace;
+}
+.repo_topics:empty {
+    display: none;
+    background: red;
+}
+
+.git_repo>*>.repo_topics {
+    color: #bcbcef;
+    margin-top: 12px;
+    padding: 10px 0px 11px 10px;
+    background: #1d1d28;
+}
+
+.git_repo>*>*>.note {
+    font-size: clamp(0.85rem,1rem,1.5rem);
+    font-family: monospace;
+    padding: 0px 0px 0px 7px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.git_repo>.middle_part {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.repo_description {
+    flex: 1;
+    padding: 5px 0px 5px 5px;
+    max-width: 100%;
+}
+
+.git_repo>*>*>.subtitle {
+    height: calc(2rem + 10px);
+    padding: 5px 0px 5px 5px;
+    flex-wrap: wrap;
+    color: #9393d6;
+}
+.repo_misc>.misc_content{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-content: center;
     flex-wrap: wrap;
     align-items: stretch;
@@ -201,6 +243,12 @@ hr {
 
 .repo_misc>div>* {
     margin-left: 5px;
+    font-family: sans-serif;
+}
+
+.repo_misc>*>div>a {
+    text-decoration: none;
+    font-family: sans-serif;
 }
 
 .hamburger {
