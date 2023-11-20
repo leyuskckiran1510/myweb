@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "iconfont";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(/static/fonts/fa-brands-400.woff2) format("woff2")
+}
+@font-face {
+    font-family: "iconfont2";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(/static/fonts/fa-regular-400.ttf) format("truetype")
+}
+
+.icn {
+    font-family: "iconfont";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display, inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto
+}
+
+.icn-twitter:before {
+    content: "\f099";
+}
+.icn-x:before {
+    content: "\e61b";
+}
+
+.icn-github:before {
+    content: "\f09b"
+}
+
+.icn-linkedin:before {
+    content: "\f08c"
+}
+
+.icn-facebook:before {
+    content: "\f09a"
+}
+
+.icn-instagram:before {
+    content: "\f16d"
+}
+
+.icn-hackerrank:before {
+    content: "\f5f7"
+}
+
+.icn-mail:before {
+    font-family: "iconfont2";
+    content: "\f0e0"
+}
+
+.icn-web:before{
+    font-family: "iconfont2";
+    content: "\e60e";
+}
+
