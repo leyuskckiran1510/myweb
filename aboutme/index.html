@@ -77,7 +77,7 @@
             </div>
             <div class="content">
                 <div class="profile">
-                    This is profile stuff
+                   
                 </div>
             </div>
         </div>
@@ -118,6 +118,11 @@
         document.querySelector(".hamburger").innerHTML = ham_array[sidebar_toggel]
     };
     window.onresize = side_bar_adjust
+    old = window.onload
+    window.onload=(x)=>{
+        old(x)
+        document.querySelector(".sb_profile").click()
+    }
 </script>
 <script src="/static/js/aboutme/git.js"></script>
 <script src="/static/js/aboutme/profile.js"></script>

@@ -41,7 +41,7 @@ body {
 }
 
 .sidebar {
-    position: relative;
+    position: sticky;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -49,6 +49,19 @@ body {
     width: 100%;
     padding: 10px;
 }
+
+.hamburger {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    font-size: 2.5rem;
+    top: 15px;
+    left: 20px;
+    text-align: center;
+    z-index: 1;
+}
+
+
 
 
 .sidebar>div {
@@ -107,8 +120,7 @@ hr {
 
 .sb_topic:hover {
     cursor: pointer;
-    padding: 0px var(--g_rel);
-/*    margin: 0px var(--g_rel) 0px 0px;*/
+    margin: 0px var(--g_rel) 0px 0px;
     background: var(--col_ibg);
 }
 
@@ -303,34 +315,95 @@ div#link a:-webkit-any-link:active {
 */
 
 
-.hamburger {
-    display: none;
-    position: absolute;
-    cursor: pointer;
-    font-size: 2.5rem;
-    top: 15px;
-    left: 20px;
-    text-align: center;
-    z-index: 1;
+/*
+    Profile(Start)
+*/
+
+.content._profile{
+    display: grid;
+    grid-template-columns: 1fr;
+
+}
+.profile{
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
-/*.hamburger:after {
-    
+.profile section {
+    margin: 3px 0px;
+    display: flex;
+    max-width: 100%;
+    padding: 5px 3px;
+    background: #1d1d27;
+    outline: solid 1px #494969;
+    border-bottom-right-radius: 22px;
+}
+.profile caption {
+  padding: 0px;
+  caption-side: bottom;
+}
+.profile tbody {
+    margin-top: 16px;
+    margin-left: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 26px;
+    justify-items: start;
+    align-items: center;
+}
+
+.profile th,
+.profile td{
+    margin: 5px;
+    text-align: left;
+}
+
+.profile th {
+    width: 5em;
+}
+.profile thead th{
+    text-align: center;
+}
+.profile a {
+    text-decoration: none;
+    color: #9797d3;
+}
+.profile small {
+    font-size: xx-small;
+    color: #86868b;
+    /* font-size: 0.6rem; */
+}
+/*
+.profile table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: 0.8rem;
 }*/
+
+/*
+    Profile(End)
+*/
+
+
+
+
+/* Media Queries */
 
 @media(max-width:950px) {
     .content {
         grid-template-columns: auto auto;
     }
-    /*.sidebar{
-        display: none;
-    }*/
-
 }
 
 @media(max-width:450px) {
     .content {
         grid-template-columns: auto;
+    }
+    .profile tbody {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 }
 
