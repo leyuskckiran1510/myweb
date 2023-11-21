@@ -165,6 +165,7 @@ hr {
     width: 0.5svw;
     background-color: var(--col_b);
 }
+
 /*
   Git Style(Start)
 */
@@ -206,7 +207,7 @@ hr {
 
 
 .git_repo>*>*>.note {
-    font-size: clamp(0.85rem,1rem,1.5rem);
+    font-size: clamp(0.85rem, 1rem, 1.5rem);
     font-family: monospace;
     padding: 0px 0px 0px 7px;
     display: flex;
@@ -221,6 +222,7 @@ hr {
     display: flex;
     flex-direction: column;
 }
+
 .repo_description {
     flex: 1;
     padding: 5px 0px 5px 5px;
@@ -233,7 +235,8 @@ hr {
     flex-wrap: wrap;
     color: #9393d6;
 }
-.repo_misc>.misc_content{
+
+.repo_misc>.misc_content {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -264,6 +267,7 @@ hr {
     text-decoration: none;
     font-family: sans-serif;
 }
+
 /*
   Git Style(End)
 */
@@ -272,7 +276,7 @@ hr {
     Digital FootPrint(Start)
 */
 
-.socials{
+.socials {
     display: flex !important;
 }
 
@@ -284,22 +288,25 @@ hr {
     align-content: space-around;
     justify-content: flex-start;
 }
+
 div#link {
     display: flow;
     max-width: 100%;
     margin: 14px;
     padding: 12px;
-    font-size: clamp(1rem,1.5rem,2.5rem);
+    font-size: clamp(1rem, 1.5rem, 2.5rem);
 }
 
 div#link i {
     padding: 0px 23px;
 }
+
 div#link a {
     text-decoration: none;
     padding: 0px 23px;
     transition: ease-in-out 100ms;
 }
+
 div#link a:-webkit-any-link:focus-visible,
 div#link a:hover,
 div#link a:-webkit-any-link:active {
@@ -319,41 +326,88 @@ div#link a:-webkit-any-link:active {
     Profile(Start)
 */
 
-.content._profile{
+.content._profile {
     display: grid;
     grid-template-columns: 1fr;
 
 }
-.profile{
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
-.profile section {
-    margin: 3px 0px;
+.profile {
     display: flex;
-    max-width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+tr {
+    display: flex;
+    /* flex: 1; */
+    flex-direction: row;
+    /* height: 25px; */
+    align-items: center;
+}
+.skills_info td {
+    display: flex;
+    flex: 1;
+    height: 53px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.profile table {
+    display: flex;
+    min-height: 243px;
+    flex-direction: column;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    flex: 1;
+}
+.profile section {
+    flex: 1;
+    display: flex;
+    margin: 9px 4px;
+    grid-template-columns: auto auto;
     padding: 5px 3px;
     background: #1d1d27;
     outline: solid 1px #494969;
     border-bottom-right-radius: 22px;
+    flex-direction: row;
+    align-content: stretch;
+    flex-wrap: nowrap;
 }
+
 .profile caption {
-  padding: 0px;
-  caption-side: bottom;
+    padding: 0px;
+    caption-side: bottom;
+}
+
+.profile span {
+    box-shadow: 0 0 6px 0px #09090c;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 10px;
 }
 .profile tbody {
+    flex: 1;
     margin-top: 16px;
     margin-left: 16px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3px 26px;
-    justify-items: start;
-    align-items: center;
+    grid-template-columns: auto auto;
+    /* gap: 3px 26px; */
+    align-items: start;
 }
-
+.profile tbody {
+    /* flex: 1; */
+    margin-top: 16px;
+    margin-left: 16px;
+    margin: 16px;
+    display: grid;
+    /* grid-template-columns: auto auto; */
+    /* gap: 3px 26px; */
+    /* align-items: start; */
+    /* min-height: max-content; */
+}
 .profile th,
-.profile td{
+.profile td {
     margin: 5px;
     text-align: left;
 }
@@ -361,26 +415,32 @@ div#link a:-webkit-any-link:active {
 .profile th {
     width: 5em;
 }
-.profile thead th{
+.profile thead{
+    display: flex;
+    justify-content: space-around;
+}
+.profile thead th {  
+    width: 100%;
     text-align: center;
 }
+
 .profile a {
     text-decoration: none;
     color: #9797d3;
 }
+
 .profile small {
     font-size: xx-small;
     color: #86868b;
     /* font-size: 0.6rem; */
 }
-/*
-.profile table {
-  border-collapse: collapse;
-  border: 2px solid rgb(200, 200, 200);
-  letter-spacing: 1px;
-  font-family: sans-serif;
-  font-size: 0.8rem;
-}*/
+
+.profile tfoot {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+}
 
 /*
     Profile(End)
@@ -401,6 +461,7 @@ div#link a:-webkit-any-link:active {
     .content {
         grid-template-columns: auto;
     }
+
     .profile tbody {
         display: grid;
         grid-template-columns: 1fr;
