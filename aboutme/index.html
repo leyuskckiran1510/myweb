@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/static/css/aboutme/style.css">
     <link rel="stylesheet" href="/static/css/icons.css">
     <link rel=preload as="image" href="/static/img/low_side_pp.jpeg" priority=high>
+    <link rel=preload as="font" href="/static/fonts/fa-regular-400.ttf" priority=high>
+    <link rel=preload as="font" href="/static/fonts/fa-brands-400.woff2" priority=high>
+    <link rel=preload as="image" href="/static/img/certs/low_res_100_challanges.jpg" priority=high>
     <script src="/static/js/lilhx.js"></script>
     </script>
     <title>About</title>
@@ -121,7 +124,8 @@
     old = window.onload
     window.onload=(x)=>{
         old(x)
-        document.querySelector(".sb_profile").click()
+        // document.querySelector(".sb_profile").click()
+        document.querySelector(".sb_cert").click()
     }
 </script>
 <script src="/static/js/aboutme/git.js"></script>
