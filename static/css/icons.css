@@ -1,17 +1,3 @@
-@font-face {
-    font-family: "iconfont";
-    font-style: normal;
-    font-weight: 400;
-    font-display: block;
-    src: url(/static/fonts/fa-brands-400.woff2) format("woff2")
-}
-@font-face {
-    font-family: "iconfont2";
-    font-style: normal;
-    font-weight: 400;
-    font-display: block;
-    src: url(/static/fonts/fa-regular-400.ttf) format("truetype")
-}
 
 .icn {
     font-family: "iconfont";

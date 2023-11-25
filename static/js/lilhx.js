@@ -198,7 +198,10 @@ let change_state = (text) => {
     return text;
 }
 
+
+
 let load_all = ({ srcElement }) => {
+    
     let pointer = 0;
     if (document.body.attributes.load_state != undefined) {
         const storedDictionary = sessionStorage.getItem('STATES_VARS');

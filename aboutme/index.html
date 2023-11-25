@@ -4,12 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
     <link rel="stylesheet" href="/static/css/aboutme/style.css">
     <link rel="stylesheet" href="/static/css/icons.css">
-    <link rel=preload as="image" href="/static/img/low_side_pp.jpeg" priority=high>
-    <link rel=preload as="font" href="/static/fonts/fa-regular-400.ttf" priority=high>
+    <!-- Fonts (Preload)
     <link rel=preload as="font" href="/static/fonts/fa-brands-400.woff2" priority=high>
+    <link rel=preload as="image" href="/static/img/low_side_pp.jpeg" priority=high>
+    -->
+    <!-- Images (preload)
+    <link rel=preload as="font" href="/static/fonts/fa-regular-400.ttf" priority=high>
     <link rel=preload as="image" href="/static/img/certs/low_res_100_challanges.jpg" priority=high>
+   -->
+    <!-- JS -->
     <script src="/static/js/lilhx.js"></script>
     </script>
     <title>About</title>
@@ -24,6 +30,11 @@
             <div></div>
             <div class="name_alias_box">
                 Leyuskc
+                <div class="checker">
+
+                    <label for="lightmode"></label>
+                    <input type="checkbox" id="lightmode">
+                </div>
             </div>
             <div></div>
             <div class="small_pix">
@@ -63,8 +74,8 @@
                 </div>
             </div>
 
-            <div class="sb_topic sb_df" clickable fetch="./others.html" target=".content-holder"
-                swap_inner handler="toggle_sidebar">
+            <div class="sb_topic sb_df" clickable fetch="./others.html" target=".content-holder" swap_inner
+                handler="toggle_sidebar">
                 <p bubble>
                     Digital Footprints
                 </p>
@@ -80,7 +91,7 @@
             </div>
             <div class="content">
                 <div class="profile">
-                   
+
                 </div>
             </div>
         </div>
@@ -121,9 +132,24 @@
         document.querySelector(".hamburger").innerHTML = ham_array[sidebar_toggel]
     };
     window.onresize = side_bar_adjust
+    service_register = ()=>{
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register('/serviceworker.js').then(function (registration) {
+            console.log("Registered a Service Worker ", registration);
+        }, function (error) {
+            console.error("Could not register a Service Worker ", error);
+        });
+    }
+    else {
+        console.error("Service Workers are not supported in this browser.");
+    }
+}
     old = window.onload
-    window.onload=(x)=>{
-        old(x)
+    window.onload = (x) => {
+        service_register()
+        if(typeof(old)=="function"){
+            old(x)
+        }
         // document.querySelector(".sb_profile").click()
         document.querySelector(".sb_cert").click()
     }
@@ -133,24 +159,24 @@
 <script src="/static/js/aboutme/codec.js"></script>
 <script src="/static/js/aboutme/others.js"></script>
 <script>
-    
+
     let url_state = {
         "#profile": ".sb_profile",
         "#cert": ".sb_cert",
         "#others": ".sb_df",
         "#github": ".sb_github"
     }
-    
+
     Object.entries(url_state).forEach(([x, b]) => {
         if (x == window.location.hash) {
             console.log(x)
-            if(x=="#github"){
-                setTimeout(repos_update,500)
-                
+            if (x == "#github") {
+                setTimeout(repos_update, 500)
+
             }
-            else{
-            document.querySelector(b).click()
-        }
+            else {
+                document.querySelector(b).click()
+            }
 
         }
     })
