@@ -27,19 +27,21 @@
 
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+    let adopt = (value) => { 
+        return value instanceof P ? value : new P((resolve) => { resolve(value); }); 
+    }
+    return new (P || (P = Promise))((resolve, reject) => {
+        let fulfilled = (value) => { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        let rejected = (value) => { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        let step = (result) => { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
+    var _ = { label: 0, sent: () => { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = () => { return this; }), g;
+    function verb(n) { return (v) => { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
@@ -65,45 +67,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var cacheName = "leyuskc_web-v1";
 var assets = [
-    './index.html',
-    './static/img/low_side_pp.jpeg',
-    './static/img/certs/w3school_python.jpg',
-    './static/img/certs/hackerrank_problem_solving.jpg',
-    './static/img/certs/DjangoAndMongo.jpg',
-    './static/img/certs/ethicalHacking.jpg',
-    './static/img/certs/downUnderCtf.jpg',
-    './static/img/certs/low_res_100_challanges.jpg',
-    './static/img/certs/hackerrank_basic_python.jpg',
-    './static/img/certs/100_challanges.jpg',
-    './static/img/side_pp.jpeg',
-    './static/js/lilhx.js',
-    './static/js/aboutme/profile.js',
-    './static/js/aboutme/codec.js',
-    './static/js/aboutme/others.js',
     './static/fonts/fa-regular-400.ttf',
     './static/fonts/fa-brands-400.woff2',
     './static/css/home.css',
     './static/css/icons.css',
     './static/css/aboutme/style.css',
-    './test/test.html',
-    './README.md',
-    './plan_and_progess.md',
-    './serviceworker.js',
-    './aboutme/profile.html',
-    './aboutme/codecorner.html',
-    './aboutme/index.html',
+    './aboutme/profile.html', ,
     './aboutme/certs.html',
     './aboutme/others.html',
-
 ];
 
-self.addEventListener("install", function (e) {
+self.addEventListener("install", (e) => {
     console.log("[Service Worker] Install");
     var event = e;
-    event.waitUntil((function () {
-        return __awaiter(void 0, void 0, void 0, function () {
+    event.waitUntil((() => {
+        return __awaiter(void 0, void 0, void 0, () => {
             var cache;
-            return __generator(this, function (_a) {
+            return __generator(this, (_a) => {
                 switch (_a.label) {
                     case 0:
                         console.log("[Service Worker] Caching all the assets");
@@ -117,13 +97,13 @@ self.addEventListener("install", function (e) {
         });
     })());
 });
-self.addEventListener("activate", function (e) {
+self.addEventListener("activate", (e) => {
     console.log("[Service Worker] Activate");
     var event = e;
-    event.waitUntil((function () {
-        return __awaiter(void 0, void 0, void 0, function () {
+    event.waitUntil((() => {
+        return __awaiter(void 0, void 0, void 0, () => {
             var keys, _a, _b, _i, key;
-            return __generator(this, function (_c) {
+            return __generator(this, (_c) => {
                 switch (_c.label) {
                     case 0:
                         console.log("[Service Worker] Cleaning up all caches");
@@ -152,12 +132,12 @@ self.addEventListener("activate", function (e) {
         });
     })());
 });
-self.addEventListener("fetch", function (e) {
+self.addEventListener("fetch", (e) => {
     var event = e;
-    event.respondWith((function () {
-        return __awaiter(void 0, void 0, void 0, function () {
+    event.respondWith((() => {
+        return __awaiter(void 0, void 0, void 0, () => {
             var cache, response;
-            return __generator(this, function (_a) {
+            return __generator(this, (_a) => {
                 switch (_a.label) {
                     case 0:
                         console.log("[Service Worker] Fetch " + event.request.url);

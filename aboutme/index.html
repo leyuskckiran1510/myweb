@@ -17,6 +17,40 @@
    -->
     <!-- JS -->
     <script src="/static/js/lilhx.js"></script>
+    <script type="text/javascript">
+        let ___real_console = console
+        let ___func = (...x) => {
+            if(DEBUGG){
+                ___real_console.log("[DEBUG_MODE]", ...x)
+            }
+        }
+        var console = {
+            "debug": ___func,
+            "error": ___func,
+            "info": ___func,
+            "log": ___func,
+            "warn": ___func,
+            "dir": ___func,
+            "dirxml": ___func,
+            "table": ___func,
+            "trace": ___func,
+            "group": ___func,
+            "groupCollapsed": ___func,
+            "groupEnd": ___func,
+            "clear": ___func,
+            "count": ___func,
+            "countReset": ___func,
+            "assert": ___func,
+            "profile": ___func,
+            "profileEnd": ___func,
+            "time": ___func,
+            "timeLog": ___func,
+            "timeEnd": ___func,
+            "timeStamp": ___func,
+            "context": ___func,
+            "createTask": ___func,
+            "memory": ___func,
+        }
     </script>
     <title>About</title>
 </head>
@@ -132,22 +166,22 @@
         document.querySelector(".hamburger").innerHTML = ham_array[sidebar_toggel]
     };
     window.onresize = side_bar_adjust
-    service_register = ()=>{
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register('/serviceworker.js').then(function (registration) {
-            console.log("Registered a Service Worker ", registration);
-        }, function (error) {
-            console.error("Could not register a Service Worker ", error);
-        });
+    service_register = () => {
+        if ("serviceWorker" in navigator && !DEBUGG) {
+            navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
+                console.log("Registered a Service Worker ", registration);
+            }, function(error) {
+                console.error("Could not register a Service Worker ", error);
+            });
+        }
+        else {
+            console.error("Service Workers are not supported in this browser.");
+        }
     }
-    else {
-        console.error("Service Workers are not supported in this browser.");
-    }
-}
     old = window.onload
     window.onload = (x) => {
         service_register()
-        if(typeof(old)=="function"){
+        if (typeof (old) == "function") {
             old(x)
         }
         // document.querySelector(".sb_profile").click()
@@ -169,7 +203,6 @@
 
     Object.entries(url_state).forEach(([x, b]) => {
         if (x == window.location.hash) {
-            console.log(x)
             if (x == "#github") {
                 setTimeout(repos_update, 500)
 
