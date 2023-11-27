@@ -6,38 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="static/css/aboutme/style.css">
     <link rel="stylesheet" href="static/css/home.css">
-
+    <script type="text/javascript" src="static/js/lilhx.js"></script>
     <title>Leyuskc</title>
 </head>
 
 <body>
-
-    <header>
-        <div class="title">
-            Kiran Raj Dhakal
-            <div class="checker">
-
-                    <label for="lightmode"></label>
-                    <input type="checkbox" id="lightmode">
+    <div class="wm">
+        <div class="application_window">
+            <app clickable handler="about_me_func" dragable float=".application_window">
+                <div class="icon">
+                    <img src="/static/img/low_side_pp.jpeg" alt="">
                 </div>
+                <div class="title">
+                    About Me
+                </div>
+            </app>
+            <app clickable handler="toTaskBar" fetch="/desktop/terminal.html" append target="body" dragable
+                float=".application_window">
+                <div class="icon">
+                    <img src="/static/img/terminal.jpg" alt="">
+                </div>
+                <div class="title">
+                    ST
+                </div>
+            </app>
+            <app clickable handler="toTaskBar" fetch="/desktop/projects.html" append target="body" dragable
+                float=".application_window">
+                <div class="icon">
+                    <img src="/static/img/projects.jpg" alt="">
+                </div>
+                <div class="title">
+                    Projects
+                </div>
+            </app>
+            <app clickable handler="toTaskBar" fetch="/desktop/files.html" append target="body" dragable
+                float=".application_window">
+                <div class="icon">
+                    <img src="/static/img/folder.png" alt="">
+                </div>
+                <div class="title">
+                    Files
+                </div>
+            </app>
         </div>
-
-        <div class="links">
-            <ul class="link-ul">
-                <li class="link-li">
-                    <a href="/aboutme">About</a>
-                </li>
-                <li class="link-li">
-                    <a href="#">Projects</a>
-                </li>
-            </ul>
+        <div class="task_bar">
+            <text>
+                made-with-<a href="https://github.com/leyuskckiran1510/lilhx">lilhx</a>
+            </text>
         </div>
+    </div>
 
-    </header>
-    <main></main>
-    <footer>
-
-    </footer>
 </body>
+<script>
+    about_me_func = (...x) => {
+        window.open("/aboutme", "_blank")
+    }
+    let ON_TASK_BAR = new Map()
+    TASK_BAR = document.querySelector(".task_bar")
+    toTaskBar = (self, target, fetch) => {
+        // ON_TASK_BAR.push(self)
+        ON_TASK_BAR.set(self, { style: self.getAttribute("style") })
+        self.removeAttribute("style")
+        self.removeAttribute("dragable")
+        self.removeAttribute("clickable")
+        TASK_BAR.append(self)
+    }
+    var close_window = (...x) => {
+        
+        console.log("close_window", ...x)
+
+    }
+    var maxim_window = (...x) => {
+        console.log("maxim_window", ...x)
+
+    }
+    var minim_window = (...x) => {
+        console.log("minim_window", ...x)
+
+    }
+</script>
 
 </html>

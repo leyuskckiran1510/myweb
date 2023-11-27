@@ -184,8 +184,12 @@
         if (typeof (old) == "function") {
             old(x)
         }
-        // document.querySelector(".sb_profile").click()
-        document.querySelector(".sb_cert").click()
+        if(!DEBUGG){
+            document.querySelector(".sb_profile").click()
+        }else{
+            document.querySelector(".sb_profile").click()
+            // document.querySelector(".sb_cert").click()
+        }
     }
 </script>
 <script src="/static/js/aboutme/git.js"></script>

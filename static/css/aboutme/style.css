@@ -675,9 +675,9 @@ a {
 
 .certificates img {
     grid-column: 1/-1;
-    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
 }
-
 /*
     Certification(End)
 */
