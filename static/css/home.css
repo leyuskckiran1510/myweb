@@ -100,7 +100,7 @@ app .title {
     opacity: 0.97;
     background: #332c2c;
     z-index: 1;
-    overflow: scroll;
+    overflow: hidden;
 }
 .terminal:focus,
 .terminal:hover,
@@ -221,4 +221,30 @@ app .title {
     padding: 3px;
     text-overflow: initial;
     max-width: 100%;
+}
+
+.terminal.st .body  .input {
+    display: flex;
+    flex-flow: row;
+    overflow: scroll;
+}
+.terminal.st .body{
+    overflow: scroll;
+}
+
+.terminal.st .body::-webkit-scrollbar{  
+    width: 10px;
+}
+.terminal.st .body input,
+.terminal.st .body input:hover,
+.terminal.st .body input:active,
+.terminal.st .body input:target,
+.terminal.st .body input:focus,
+.terminal.st .body input:focus-visible {
+    -webkit-appearance: none;
+    background: #342b2d;
+    border-color: #352c2e;
+    border: 0px;
+    outline: 0px;
+    width: 100%;
 }

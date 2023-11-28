@@ -21,7 +21,7 @@
                     About Me
                 </div>
             </app>
-            <app class = "st" clickable handler="toTaskBar" fetch="/desktop/terminal.html" append target="body" dragable
+            <app class="st" clickable handler="toTaskBar" fetch="/desktop/terminal.html" append target="body" dragable
                 float=".application_window">
                 <div class="icon">
                     <img src="/static/img/terminal.jpg" alt="">
@@ -30,8 +30,8 @@
                     ST
                 </div>
             </app>
-            <app class = "projects" clickable handler="toTaskBar" fetch="/desktop/projects.html" append target="body" dragable
-                float=".application_window">
+            <app class="projects" clickable handler="toTaskBar" fetch="/desktop/projects.html" append target="body"
+                dragable float=".application_window">
                 <div class="icon">
                     <img src="/static/img/projects.jpg" alt="">
                 </div>
@@ -39,7 +39,7 @@
                     Projects
                 </div>
             </app>
-            <app class = "files" clickable handler="toTaskBar" fetch="/desktop/files.html" append target="body" dragable
+            <app class="files" clickable handler="toTaskBar" fetch="/desktop/files.html" append target="body" dragable
                 float=".application_window">
                 <div class="icon">
                     <img src="/static/img/folder.png" alt="">
@@ -62,136 +62,169 @@
         window.open("/aboutme/", "_blank")
     }
 
-    let stripAttrinbutes=(self)=>{
+    let stripAttrinbutes = (self) => {
         self.removeAttribute("style")
         self.removeAttribute("dragable")
         self.removeAttribute("clickable")
         self.removeAttribute("moving")
     }
-    let reattachAttrinbutes=(self)=>{
-        self.setAttribute("style","")
-        self.setAttribute("dragable","")
-        self.setAttribute("clickable","")
-       
+    let reattachAttrinbutes = (self) => {
+        self.setAttribute("style", "")
+        self.setAttribute("dragable", "")
+        self.setAttribute("clickable", "")
+
     }
 
-    let start_terminal = ()=>{
-        document.querySelector(".terminal .body").addEventListener("keypress",(event)=>{
-                console.log(event)
-            })
+    var focous_input =(self,..._)=>{
+        self.querySelector("input").focus()
+        console.log(self.querySelector("input"))
+
+    }
+
+    let start_terminal = () => {
+        let termBody = document.querySelector(".terminal .body")
+        // .addEventListener("keypress",(event)=>{
+        //         console.log(event)
+        //     })
+        let child = document.createElement("div")
+        let iput = document.createElement("input")
+        child.className = "input"
+        child.innerText = "~$ "
+        child.append(iput)
+        termBody.append(child)
+        iput.focus()
+        iput.onkeypress = (e) => {
+            if (e.keyCode === 13) {
+                let container = document.createElement("div")
+                container.className = "lastCommand"
+                let prompt = document.createElement("div")
+                let message = document.createElement("div")
+                message.className = "message"
+                prompt.className ="prompt"
+                message.innerText = `${iput.value}: command not found`
+                prompt.innerText = `~$ ${iput.value}`
+                container.appendChild(prompt)
+                container.appendChild(message)
+                document.querySelector(".terminal .body .input").outerHTML = ""
+                termBody.append(container)
+                iput.value = ""
+                start_terminal()
+            }
+        }
+        
     }
     let FILE_JSON = null;
 
-    let file_appender = (back,json,path)=>{
+    let file_appender = (back, json, path) => {
         let parent = document.querySelector(".terminal.files .body")
         parent.innerHTML = ""
-        if(json==null && json){
+        if (json == null && json) {
             return
         }
-        if(json.type=="directory" && json.contents ){
+        if (json.type == "directory" && json.contents) {
             let container = document.createElement("div")
-            container.className="fileManager"
+            container.className = "fileManager"
             let pathText = document.createElement("div")
-            pathText.className="path"
+            pathText.className = "path"
             pathText.innerText = `${path}`
             let homeButton = document.createElement("div")
-            homeButton.className="homeBtn"
+            homeButton.className = "homeBtn"
             homeButton.innerText = "🏠"
-            homeButton.onclick = ()=>{
-                file_appender(FILE_JSON,FILE_JSON[0],"/")
+            homeButton.onclick = () => {
+                file_appender(FILE_JSON, FILE_JSON[0], "/")
             }
             let backButton = document.createElement("div")
-            backButton.className="backBtn"
-            backButton.innerText="⬅️"
-            backButton.onclick = ()=>{
-                back_path = path.split("/").slice(0,-2).join("/")
-                file_appender(FILE_JSON[0],back,`/${back_path}`)
+            backButton.className = "backBtn"
+            backButton.innerText = "⬅️"
+            backButton.onclick = () => {
+                back_path = path.split("/").slice(0, -2).join("/")
+                file_appender(FILE_JSON[0], back, `/${back_path}`)
             }
             parent.appendChild(homeButton)
             parent.appendChild(backButton)
             parent.appendChild(pathText)
             parent.appendChild(container)
-            json.contents.forEach(_x=>{
+            json.contents.forEach(_x => {
                 let child = document.createElement("div")
-                child.className = _x.type+" in_body"
+                child.className = _x.type + " in_body"
                 child.innerText = _x.name
                 container.append(child)
-                if(_x.type=="directory" && _x?.contents?.length>0){
-                    child.onclick = ()=>{
-                        file_appender(json,_x,`${path}${_x.name}/`)
+                if (_x.type == "directory" && _x?.contents?.length > 0) {
+                    child.onclick = () => {
+                        file_appender(json, _x, `${path}${_x.name}/`)
                     }
-                }else{
-                    child.onclick=()=>{
-                        window.open(`https://github.com/leyuskckiran1510/myweb/blob/main/${path}${_x.name}/`,target="_blank")
+                } else {
+                    child.onclick = () => {
+                        window.open(`https://github.com/leyuskckiran1510/myweb/blob/main/${path}${_x.name}/`, target = "_blank")
                     }
                 }
             })
 
-        }else{
+        } else {
             // console.log(`${path}${json.name}`)
         }
     }
 
-    
-    let fetch_files = ()=>{
-        if(FILE_JSON?.length>1){
-            file_appender(FILE_JSON,FILE_JSON[0],"/")
+
+    let fetch_files = () => {
+        if (FILE_JSON?.length > 1) {
+            file_appender(FILE_JSON, FILE_JSON[0], "/")
             return
         }
         let file_api = "/dynamic/files.json";
         fetch(file_api).
-        then(x=>x.json()).
-        then(x=>FILE_JSON=x).
-        finally(()=>{
-            file_appender(FILE_JSON,FILE_JSON[0],"/")
-        }).
-        catch((e)=>{
-            console.log("This happned",e)
-        })
+            then(x => x.json()).
+            then(x => FILE_JSON = x).
+            finally(() => {
+                file_appender(FILE_JSON, FILE_JSON[0], "/")
+            }).
+            catch((e) => {
+                console.log("This happned", e)
+            })
     }
 
-    let show_projects = ()=>{
+    let show_projects = () => {
 
     }
 
     let ON_TASK_BAR = new Map()
     TASK_BAR = document.querySelector(".task_bar")
     toTaskBar = (self, target, fetch) => {
-        ON_TASK_BAR.set(self, { style: self.getAttribute("style"),parent:self.parentNode })
+        ON_TASK_BAR.set(self, { style: self.getAttribute("style"), parent: self.parentNode })
         stripAttrinbutes(self)
         TASK_BAR.append(self)
-        if(self.className.search("st")>=0){    
+        if (self.className.search("st") >= 0) {
             start_terminal()
-        }else if(self.className.search('files')>=0){
+        } else if (self.className.search('files') >= 0) {
             fetch_files()
-        }else if(self.className.search('projects')>=0){
+        } else if (self.className.search('projects') >= 0) {
             show_projects()
         }
     }
 
-    let findActionParent = (elemn)=>{
+    let findActionParent = (elemn) => {
         let parent = elemn.parentNode
-        while(parent && parent.getAttribute("app")==null){
-            parent=parent.parentNode
+        while (parent && parent.getAttribute("app") == null) {
+            parent = parent.parentNode
         }
         return parent;
     }
 
-    var close_window = (self,..._) => {
+    var close_window = (self, ..._) => {
         let parent = findActionParent(self)
-        ON_TASK_BAR.forEach((value,key,map)=>{
-            if (parent.className.search(key.className)>=0){
+        ON_TASK_BAR.forEach((value, key, map) => {
+            if (parent.className.search(key.className) >= 0) {
                 reattachAttrinbutes(key)
                 value.parent.append(key)
                 ON_TASK_BAR.delete(key)
             }
         })
-        if(parent){
-            parent.outerHTML=""
+        if (parent) {
+            parent.outerHTML = ""
         }
 
     }
-    var maxim_window = (self,..._) => {
+    var maxim_window = (self, ..._) => {
         /*
             Storing the old style in `_style` attribute
             and on unmaximizing set the new style to old style
@@ -203,29 +236,29 @@
             width: "100%",
             height: "calc(100% - 5vh)",
         }
-        let icons = ["⌧","☐"]
-        let style_magic = ["","_"]
-        let maximize=0
+        let icons = ["⌧", "☐"]
+        let style_magic = ["", "_"]
+        let maximize = 0
         let parent = findActionParent(self)
-        if(self.innerText=="⌧"){
-            maximize=1
+        if (self.innerText == "⌧") {
+            maximize = 1
         }
         self.innerText = icons[maximize]
         let old_style = parent.getAttribute(`${style_magic[maximize]}style`)
-        parent.setAttribute(`${style_magic[(maximize+1)%2]}style`,old_style)
-        !maximize?Object.assign(parent.style,_style):0
+        parent.setAttribute(`${style_magic[(maximize + 1) % 2]}style`, old_style)
+        !maximize ? Object.assign(parent.style, _style) : 0
     }
 
-    var minim_window = (self,..._) => {
+    var minim_window = (self, ..._) => {
         let parent = findActionParent(self)
-        ON_TASK_BAR.forEach((value,key,map)=>{
-            if (parent.className.search(key.className)>=0){
-                key.onclick = ()=>{
-                    parent.style.display="grid"
+        ON_TASK_BAR.forEach((value, key, map) => {
+            if (parent.className.search(key.className) >= 0) {
+                key.onclick = () => {
+                    parent.style.display = "grid"
                 }
             }
         })
-        parent.style.display="none"
+        parent.style.display = "none"
     }
 </script>
 
