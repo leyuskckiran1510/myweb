@@ -75,6 +75,85 @@
        
     }
 
+    let start_terminal = ()=>{
+        document.querySelector(".terminal .body").addEventListener("keypress",(event)=>{
+                console.log(event)
+            })
+    }
+    let FILE_JSON = null;
+
+    let file_appender = (back,json,path)=>{
+        let parent = document.querySelector(".terminal.files .body")
+        parent.innerHTML = ""
+        if(json==null && json){
+            return
+        }
+        if(json.type=="directory" && json.contents ){
+            let container = document.createElement("div")
+            container.className="fileManager"
+            let pathText = document.createElement("div")
+            pathText.className="path"
+            pathText.innerText = `${path}`
+            let homeButton = document.createElement("div")
+            homeButton.className="homeBtn"
+            homeButton.innerText = "🏠"
+            homeButton.onclick = ()=>{
+                file_appender(FILE_JSON,FILE_JSON[0],"/")
+            }
+            let backButton = document.createElement("div")
+            backButton.className="backBtn"
+            backButton.innerText="⬅️"
+            backButton.onclick = ()=>{
+                back_path = path.split("/").slice(0,-2).join("/")
+                file_appender(FILE_JSON[0],back,`/${back_path}`)
+            }
+            parent.appendChild(homeButton)
+            parent.appendChild(backButton)
+            parent.appendChild(pathText)
+            parent.appendChild(container)
+            json.contents.forEach(_x=>{
+                let child = document.createElement("div")
+                child.className = _x.type+" in_body"
+                child.innerText = _x.name
+                container.append(child)
+                if(_x.type=="directory" && _x?.contents?.length>0){
+                    child.onclick = ()=>{
+                        file_appender(json,_x,`${path}${_x.name}/`)
+                    }
+                }else{
+                    child.onclick=()=>{
+                        window.open(`https://github.com/leyuskckiran1510/myweb/blob/main/${path}${_x.name}/`,target="_blank")
+                    }
+                }
+            })
+
+        }else{
+            // console.log(`${path}${json.name}`)
+        }
+    }
+
+    
+    let fetch_files = ()=>{
+        if(FILE_JSON?.length>1){
+            file_appender(FILE_JSON,FILE_JSON[0],"/")
+            return
+        }
+        let file_api = "/dynamic/files.json";
+        fetch(file_api).
+        then(x=>x.json()).
+        then(x=>FILE_JSON=x).
+        finally(()=>{
+            file_appender(FILE_JSON,FILE_JSON[0],"/")
+        }).
+        catch((e)=>{
+            console.log("This happned",e)
+        })
+    }
+
+    let show_projects = ()=>{
+
+    }
+
     let ON_TASK_BAR = new Map()
     TASK_BAR = document.querySelector(".task_bar")
     toTaskBar = (self, target, fetch) => {
@@ -82,9 +161,11 @@
         stripAttrinbutes(self)
         TASK_BAR.append(self)
         if(self.className.search("st")>=0){    
-            document.querySelector(".terminal .body").addEventListener("keypress",(event)=>{
-                console.log(event)
-            })
+            start_terminal()
+        }else if(self.className.search('files')>=0){
+            fetch_files()
+        }else if(self.className.search('projects')>=0){
+            show_projects()
         }
     }
 

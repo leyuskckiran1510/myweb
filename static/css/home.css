@@ -164,4 +164,61 @@ app .title {
 .terminal .body {
     margin: 5px;
 }
+.terminal.files .body {
+    display: grid;
+    grid-template-rows: 2rem auto;
+    grid-template-columns: 2rem 2rem auto;
+}
 
+.terminal.files .body .fileManager{
+    grid-column: 1/-1;
+    grid-row: 2;
+    display: grid;
+    flex-flow: column;
+    grid-template-columns: repeat(auto-fill, 103px);
+    grid-auto-rows: 100px;
+}
+.terminal.files .body .homeBtn {
+    grid-column: 1;
+    display: flex;
+    grid-row: 1;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 1px;
+}
+.terminal.files .body .backBtn {
+    grid-column: 2;
+    display: flex;
+    grid-row: 1;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 1px;
+}
+
+.terminal.files .body .path {
+    grid-column: 3/-1;
+    display: flex;
+    grid-row: 1;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 1px;
+}
+
+.terminal.files .body .a{
+    flex: 1;
+}
+.terminal.files .body .file::before{
+    max-width: 100%;
+    content: url(/static/img/file.png);
+}
+.terminal.files .body .directory::before{
+    max-width: 100%;
+    content: url(/static/img/directory.png);
+}
+.file.in_body {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    text-overflow: initial;
+    max-width: 100%;
+}

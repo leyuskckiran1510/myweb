@@ -255,7 +255,7 @@ const _____lilhx_____ = function () {
                 while (srcElement && srcElement.attributes && srcElement.attributes.dragable == undefined) {
                     srcElement = srcElement.parentNode
                 }
-                if (srcElement.attributes?.dragable) {
+                if (srcElement?.attributes?.dragable) {
                     flag_drag_able = true
                 }
                 if(!flag_drag_able){
