@@ -62,7 +62,7 @@ app .title {
     align-items: center;
     justify-content: center;
 }
-.task_bar app.title{
+.task_bar app .title{
     display: none;
 }
 
@@ -99,9 +99,16 @@ app .title {
     height: 70%;
     opacity: 0.97;
     background: #332c2c;
-    /* padding: 10px; */
+    z-index: 1;
     overflow: scroll;
 }
+.terminal:focus,
+.terminal:hover,
+.terminal:active,
+.terminal:target{
+    border:1px solid salmon
+}
+
 /* Window Designs  */
 .caption_bar {
     background: #5b0e4a;

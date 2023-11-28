@@ -21,7 +21,7 @@
                     About Me
                 </div>
             </app>
-            <app clickable handler="toTaskBar" fetch="/desktop/terminal.html" append target="body" dragable
+            <app class = "st" clickable handler="toTaskBar" fetch="/desktop/terminal.html" append target="body" dragable
                 float=".application_window">
                 <div class="icon">
                     <img src="/static/img/terminal.jpg" alt="">
@@ -30,7 +30,7 @@
                     ST
                 </div>
             </app>
-            <app clickable handler="toTaskBar" fetch="/desktop/projects.html" append target="body" dragable
+            <app class = "projects" clickable handler="toTaskBar" fetch="/desktop/projects.html" append target="body" dragable
                 float=".application_window">
                 <div class="icon">
                     <img src="/static/img/projects.jpg" alt="">
@@ -39,7 +39,7 @@
                     Projects
                 </div>
             </app>
-            <app clickable handler="toTaskBar" fetch="/desktop/files.html" append target="body" dragable
+            <app class = "files" clickable handler="toTaskBar" fetch="/desktop/files.html" append target="body" dragable
                 float=".application_window">
                 <div class="icon">
                     <img src="/static/img/folder.png" alt="">
@@ -76,13 +76,16 @@
     }
 
     let ON_TASK_BAR = new Map()
-    let MINIMIZED = new Map()
     TASK_BAR = document.querySelector(".task_bar")
     toTaskBar = (self, target, fetch) => {
-        // ON_TASK_BAR.push(self)
         ON_TASK_BAR.set(self, { style: self.getAttribute("style"),parent:self.parentNode })
         stripAttrinbutes(self)
         TASK_BAR.append(self)
+        if(self.className.search("st")>=0){    
+            document.querySelector(".terminal .body").addEventListener("keypress",(event)=>{
+                console.log(event)
+            })
+        }
     }
 
     let findActionParent = (elemn)=>{
@@ -94,11 +97,14 @@
     }
 
     var close_window = (self,..._) => {
-        ON_TASK_BAR.forEach((value,key,map)=>{
-            reattachAttrinbutes(key)
-            value.parent.append(key)
-        })
         let parent = findActionParent(self)
+        ON_TASK_BAR.forEach((value,key,map)=>{
+            if (parent.className.search(key.className)>=0){
+                reattachAttrinbutes(key)
+                value.parent.append(key)
+                ON_TASK_BAR.delete(key)
+            }
+        })
         if(parent){
             parent.outerHTML=""
         }
@@ -128,12 +134,17 @@
         parent.setAttribute(`${style_magic[(maximize+1)%2]}style`,old_style)
         !maximize?Object.assign(parent.style,_style):0
     }
+
     var minim_window = (self,..._) => {
-        MINIMIZED.set(self,{"display":self.style.display})
         let parent = findActionParent(self)
+        ON_TASK_BAR.forEach((value,key,map)=>{
+            if (parent.className.search(key.className)>=0){
+                key.onclick = ()=>{
+                    parent.style.display="grid"
+                }
+            }
+        })
         parent.style.display="none"
-
-
     }
 </script>
 

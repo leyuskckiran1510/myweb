@@ -1,0 +1,285 @@
+[
+    {
+        "type": "directory",
+        "name": ".",
+        "contents": [
+            {
+                "type": "file",
+                "name": "404.md"
+            },
+            {
+                "type": "directory",
+                "name": "aboutme",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "certs.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "codecorner.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "github.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "index.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "others.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "profile.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "sample_git.json"
+                    },
+                    {
+                        "type": "file",
+                        "name": "sample_hr_badges.json"
+                    },
+                    {
+                        "type": "file",
+                        "name": "sample_hr_cert.json"
+                    },
+                    {
+                        "type": "file",
+                        "name": "sample_hr_solved.json"
+                    },
+                    {
+                        "type": "file",
+                        "name": "test.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "test.json"
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "CNAME"
+            },
+            {
+                "type": "directory",
+                "name": "desktop",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "files.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "projects.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "terminal.html"
+                    }
+                ]
+            },
+            {
+                "type": "directory",
+                "name": "dynamic",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "files.json"
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "favicon.ico"
+            },
+            {
+                "type": "file",
+                "name": "index.html"
+            },
+            {
+                "type": "file",
+                "name": "plan_and_progess.md"
+            },
+            {
+                "type": "file",
+                "name": "README.md"
+            },
+            {
+                "type": "file",
+                "name": "serviceworker.js"
+            },
+            {
+                "type": "directory",
+                "name": "static",
+                "contents": [
+                    {
+                        "type": "directory",
+                        "name": "css",
+                        "contents": [
+                            {
+                                "type": "directory",
+                                "name": "aboutme",
+                                "contents": [
+                                    {
+                                        "type": "file",
+                                        "name": "style.css"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "file",
+                                "name": "home.css"
+                            },
+                            {
+                                "type": "file",
+                                "name": "icons.css"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "directory",
+                        "name": "fonts",
+                        "contents": [
+                            {
+                                "type": "file",
+                                "name": "fa-brands-400.woff2"
+                            },
+                            {
+                                "type": "file",
+                                "name": "fa-regular-400.ttf"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "directory",
+                        "name": "img",
+                        "contents": [
+                            {
+                                "type": "directory",
+                                "name": "certs",
+                                "contents": [
+                                    {
+                                        "type": "file",
+                                        "name": "100_challanges.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "DjangoAndMongo.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "downUnderCtf.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "ethicalHacking.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "hackerrank_basic_python.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "hackerrank_problem_solving.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "low_res_100_challanges.jpg"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "w3school_python.jpg"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "file",
+                                "name": "folder.png"
+                            },
+                            {
+                                "type": "file",
+                                "name": "low_side_pp.jpeg"
+                            },
+                            {
+                                "type": "file",
+                                "name": "projects.jpg"
+                            },
+                            {
+                                "type": "file",
+                                "name": "side_pp.jpeg"
+                            },
+                            {
+                                "type": "file",
+                                "name": "terminal.jpg"
+                            },
+                            {
+                                "type": "file",
+                                "name": "wallpaper.jpg"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "directory",
+                        "name": "js",
+                        "contents": [
+                            {
+                                "type": "directory",
+                                "name": "aboutme",
+                                "contents": [
+                                    {
+                                        "type": "file",
+                                        "name": "codec.js"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "git.js"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "others.js"
+                                    },
+                                    {
+                                        "type": "file",
+                                        "name": "profile.js"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "file",
+                                "name": "lilhx.js"
+                            },
+                            {
+                                "type": "file",
+                                "name": "s.js"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "directory",
+                        "name": "others"
+                    }
+                ]
+            },
+            {
+                "type": "directory",
+                "name": "test",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "test.html"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "report",
+        "directories": 13,
+        "files": 49
+    }
+]
