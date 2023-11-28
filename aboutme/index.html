@@ -7,6 +7,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/static/css/aboutme/style.css">
     <link rel="stylesheet" href="/static/css/icons.css">
+    <script src="/static/js/s.js">
+    </script>
     <!-- Fonts (Preload)
     <link rel=preload as="font" href="/static/fonts/fa-brands-400.woff2" priority=high>
     <link rel=preload as="image" href="/static/img/low_side_pp.jpeg" priority=high>
@@ -21,7 +23,7 @@
         let ___real_console = console
         let ___func = (...x) => {
             if(DEBUGG){
-                ___real_console.log("[DEBUG_MODE]", ...x)
+                ___real_console.log(...x)
             }
         }
         var console = {

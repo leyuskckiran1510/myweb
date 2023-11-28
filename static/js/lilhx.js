@@ -163,18 +163,6 @@ const _____lilhx_____ = function () {
     
         }
 
-        let __handle_drag = (element) => {
-            console.log("This elemnt is dragged", element)
-        }
-
-        let drag_event = (...x) => {
-            console.log(...x)
-            // if(event.target.attributes.dragable){
-            //     __handle_drag(target)
-
-            // }
-        }
-    
         let click_event = (target) => {
             if (!target || target.attributes == undefined) {
                 return
@@ -250,17 +238,6 @@ const _____lilhx_____ = function () {
             traverse(target)
         }
 
-        document.querySelectorAll("[dragable]").forEach(x => {
-            x.style.cursor = "pointer";
-        })
-
-        // window.onclick = (event) => {
-
-        //     click_event(event.target)
-
-        // };
-
-
         let activeMovingDiv = {
             target: null,
             event: null,
@@ -268,6 +245,25 @@ const _____lilhx_____ = function () {
 
 
         };
+
+        window.onclick=(event)=>{
+            let srcElement = event.target
+            let flag_drag_able=false
+            if(srcElement?.attributes?.dragable!==undefined){
+                return
+            }else{
+                while (srcElement && srcElement.attributes && srcElement.attributes.dragable == undefined) {
+                    srcElement = srcElement.parentNode
+                }
+                if (srcElement.attributes?.dragable) {
+                    flag_drag_able = true
+                }
+                if(!flag_drag_able){
+                    click_event(event.target)
+                }
+            }
+        }
+
         window.onmousedown = (event) => {
             if (activeMovingDiv && activeMovingDiv.target) {
                 activeMovingDiv.target.removeAttribute("style")
@@ -335,12 +331,6 @@ const _____lilhx_____ = function () {
             }
             return NOSUCESS
 
-        }
-        const TOLORENCE = 10//px
-        let movedFromOldPos = (a, b) => {
-            let diff_x = Math.abs(a.x - b.x)
-            let diff_y = Math.abs(a.y - b.y)
-            return (diff_x + diff_y) >= TOLORENCE  
         }
 
         window.onmouseup = (event) => {

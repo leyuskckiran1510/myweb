@@ -59,29 +59,80 @@
 </body>
 <script>
     about_me_func = (...x) => {
-        window.open("/aboutme", "_blank")
+        window.open("/aboutme/", "_blank")
     }
-    let ON_TASK_BAR = new Map()
-    TASK_BAR = document.querySelector(".task_bar")
-    toTaskBar = (self, target, fetch) => {
-        // ON_TASK_BAR.push(self)
-        ON_TASK_BAR.set(self, { style: self.getAttribute("style") })
+
+    let stripAttrinbutes=(self)=>{
         self.removeAttribute("style")
         self.removeAttribute("dragable")
         self.removeAttribute("clickable")
+        self.removeAttribute("moving")
+    }
+    let reattachAttrinbutes=(self)=>{
+        self.setAttribute("style","")
+        self.setAttribute("dragable","")
+        self.setAttribute("clickable","")
+       
+    }
+
+    let ON_TASK_BAR = new Map()
+    let MINIMIZED = new Map()
+    TASK_BAR = document.querySelector(".task_bar")
+    toTaskBar = (self, target, fetch) => {
+        // ON_TASK_BAR.push(self)
+        ON_TASK_BAR.set(self, { style: self.getAttribute("style"),parent:self.parentNode })
+        stripAttrinbutes(self)
         TASK_BAR.append(self)
     }
-    var close_window = (...x) => {
+
+    let findActionParent = (elemn)=>{
+        let parent = elemn.parentNode
+        while(parent && parent.getAttribute("app")==null){
+            parent=parent.parentNode
+        }
+        return parent;
+    }
+
+    var close_window = (self,..._) => {
+        ON_TASK_BAR.forEach((value,key,map)=>{
+            reattachAttrinbutes(key)
+            value.parent.append(key)
+        })
+        let parent = findActionParent(self)
+        if(parent){
+            parent.outerHTML=""
+        }
+
+    }
+    var maxim_window = (self,..._) => {
+        /*
+            Storing the old style in `_style` attribute
+            and on unmaximizing set the new style to old style
         
-        console.log("close_window", ...x)
-
+        */
+        let _style = {
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "calc(100% - 5vh)",
+        }
+        let icons = ["⌧","☐"]
+        let style_magic = ["","_"]
+        let maximize=0
+        let parent = findActionParent(self)
+        if(self.innerText=="⌧"){
+            maximize=1
+        }
+        self.innerText = icons[maximize]
+        let old_style = parent.getAttribute(`${style_magic[maximize]}style`)
+        parent.setAttribute(`${style_magic[(maximize+1)%2]}style`,old_style)
+        !maximize?Object.assign(parent.style,_style):0
     }
-    var maxim_window = (...x) => {
-        console.log("maxim_window", ...x)
+    var minim_window = (self,..._) => {
+        MINIMIZED.set(self,{"display":self.style.display})
+        let parent = findActionParent(self)
+        parent.style.display="none"
 
-    }
-    var minim_window = (...x) => {
-        console.log("minim_window", ...x)
 
     }
 </script>
