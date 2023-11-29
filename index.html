@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="static/css/aboutme/style.css">
     <link rel="stylesheet" href="static/css/home.css">
     <script type="text/javascript" src="static/js/lilhx.js"></script>
+    <script type="text/javascript" src="commands/command.js"></script>
     <title>Leyuskc</title>
 </head>
 
@@ -75,14 +76,14 @@
 
     }
 
-    var focous_input =(self,..._)=>{
+    var focous_input = (self, ..._) => {
         self.querySelector("input").focus()
         console.log(self.querySelector("input"))
 
     }
 
     let start_terminal = () => {
-        let termBody = document.querySelector(".terminal .body")
+        let termBody = document.querySelector(".terminal.st .body")
         // .addEventListener("keypress",(event)=>{
         //         console.log(event)
         //     })
@@ -95,23 +96,35 @@
         iput.focus()
         iput.onkeypress = (e) => {
             if (e.keyCode === 13) {
-                let container = document.createElement("div")
-                container.className = "lastCommand"
-                let prompt = document.createElement("div")
-                let message = document.createElement("div")
-                message.className = "message"
-                prompt.className ="prompt"
-                message.innerText = `${iput.value}: command not found`
-                prompt.innerText = `~$ ${iput.value}`
-                container.appendChild(prompt)
-                container.appendChild(message)
-                document.querySelector(".terminal .body .input").outerHTML = ""
-                termBody.append(container)
+                {
+                    let container = document.createElement("div")
+                    container.className = "lastCommand"
+                    let prompt = document.createElement("div")
+                    let message = document.createElement("div")
+                    message.className = "message"
+                    prompt.className = "prompt"
+                    let commandName = iput.value.toString().split(" ")[0]
+                    /*
+                            `__${commandName}__` to make sure no other function are decleared
+                            by same name
+                    */
+                    if (typeof window[`__${commandName}__`] == "function") {
+                        message.innerHTML = window[`__${commandName}__`](iput.value)
+                    } else {
+                        message.innerHTML = `<div class="command_error">${iput.value}: command not found</div>`
+                    }
+                    prompt.innerText = `~$${iput.value}`
+                    container.appendChild(prompt)
+                    container.appendChild(message)
+                    termBody.append(container)
+                }
+                if(document.querySelector(".terminal.st .body .input"))
+                    document.querySelector(".terminal.st .body .input").outerHTML = ""
                 iput.value = ""
                 start_terminal()
             }
         }
-        
+
     }
     let FILE_JSON = null;
 
@@ -194,6 +207,7 @@
         stripAttrinbutes(self)
         TASK_BAR.append(self)
         if (self.className.search("st") >= 0) {
+            CURRENT_DIR = {name:null,depth:0}
             start_terminal()
         } else if (self.className.search('files') >= 0) {
             fetch_files()

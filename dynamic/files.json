@@ -10,6 +10,9 @@
       {"type":"file","name":"profile.html"}
   ]},
     {"type":"file","name":"CNAME"},
+    {"type":"directory","name":"commands","contents":[
+      {"type":"file","name":"command.js"}
+  ]},
     {"type":"directory","name":"desktop","contents":[
       {"type":"file","name":"files.html"},
       {"type":"file","name":"projects.html"},
@@ -68,5 +71,5 @@
   ]}
   ]}
 ,
-  {"type":"report","directories":12,"files":43}
+  {"type":"report","directories":13,"files":44}
 ]

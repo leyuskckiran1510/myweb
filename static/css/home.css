@@ -248,3 +248,15 @@ app .title {
     outline: 0px;
     width: 100%;
 }
+
+
+.terminal.st .body .message text {
+    color: #518e1e;
+}
+
+.terminal.st .body  .message span {
+    color: #44ca44;
+}
+.terminal.st .body .message .command_error {
+    color: #f53b3b;
+}
