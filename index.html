@@ -121,8 +121,7 @@
         }
 
     }
-    let FILE_JSON = null;
-
+   
     let file_appender = (back, json, path) => {
         let parent = document.querySelector(".terminal.files .body")
         parent.innerHTML = ""
@@ -170,8 +169,7 @@
 
         }
     }
-
-
+    let FILE_JSON =null
     let fetch_files = () => {
         if (FILE_JSON?.length > 1) {
             file_appender(FILE_JSON, FILE_JSON[0], "/")
@@ -188,6 +186,7 @@
                 console.log("This happned", e)
             })
     }
+
 
     let show_projects = () => {
 

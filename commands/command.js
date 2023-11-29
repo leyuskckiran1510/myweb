@@ -10,103 +10,26 @@ fetch("https://api.db-ip.com/v2/free/self").then(x => x.json()).then((x) => {
     ips = x
 }
 )
+let FILES_JSON = null
 
-const FILES = [
-    {
-        "type": "directory", "name": ".", "contents": [
-            { "type": "file", "name": "404.md" },
-            {
-                "type": "directory", "name": "aboutme", "contents": [
-                    { "type": "file", "name": "certs.html" },
-                    { "type": "file", "name": "codecorner.html" },
-                    { "type": "file", "name": "github.html" },
-                    { "type": "file", "name": "index.html" },
-                    { "type": "file", "name": "others.html" },
-                    { "type": "file", "name": "profile.html" }
-                ]
-            },
-            { "type": "file", "name": "CNAME" },
-            {
-                "type": "directory", "name": "desktop", "contents": [
-                    { "type": "file", "name": "files.html" },
-                    { "type": "file", "name": "projects.html" },
-                    { "type": "file", "name": "terminal.html" }
-                ]
-            },
-            {
-                "type": "directory", "name": "dynamic", "contents": [
-                    { "type": "file", "name": "files.json" }
-                ]
-            },
-            { "type": "file", "name": "favicon.ico" },
-            { "type": "file", "name": "index.html" },
-            { "type": "file", "name": "README.md" },
-            { "type": "file", "name": "serviceworker.js" },
-            {
-                "type": "directory", "name": "static", "contents": [
-                    {
-                        "type": "directory", "name": "css", "contents": [
-                            {
-                                "type": "directory", "name": "aboutme", "contents": [
-                                    { "type": "file", "name": "style.css" }
-                                ]
-                            },
-                            { "type": "file", "name": "home.css" },
-                            { "type": "file", "name": "icons.css" }
-                        ]
-                    },
-                    {
-                        "type": "directory", "name": "fonts", "contents": [
-                            { "type": "file", "name": "fa-brands-400.woff2" },
-                            { "type": "file", "name": "fa-regular-400.ttf" }
-                        ]
-                    },
-                    {
-                        "type": "directory", "name": "img", "contents": [
-                            {
-                                "type": "directory", "name": "certs", "contents": [
-                                    { "type": "file", "name": "100_challanges.jpg" },
-                                    { "type": "file", "name": "DjangoAndMongo.jpg" },
-                                    { "type": "file", "name": "downUnderCtf.jpg" },
-                                    { "type": "file", "name": "ethicalHacking.jpg" },
-                                    { "type": "file", "name": "hackerrank_basic_python.jpg" },
-                                    { "type": "file", "name": "hackerrank_problem_solving.jpg" },
-                                    { "type": "file", "name": "low_res_100_challanges.jpg" },
-                                    { "type": "file", "name": "w3school_python.jpg" }
-                                ]
-                            },
-                            { "type": "file", "name": "directory.png" },
-                            { "type": "file", "name": "file.png" },
-                            { "type": "file", "name": "folder.png" },
-                            { "type": "file", "name": "low_side_pp.jpeg" },
-                            { "type": "file", "name": "projects.jpg" },
-                            { "type": "file", "name": "side_pp.jpeg" },
-                            { "type": "file", "name": "terminal.jpg" },
-                            { "type": "file", "name": "wallpaper.jpg" }
-                        ]
-                    },
-                    {
-                        "type": "directory", "name": "js", "contents": [
-                            {
-                                "type": "directory", "name": "aboutme", "contents": [
-                                    { "type": "file", "name": "codec.js" },
-                                    { "type": "file", "name": "git.js" },
-                                    { "type": "file", "name": "others.js" },
-                                    { "type": "file", "name": "profile.js" }
-                                ]
-                            },
-                            { "type": "file", "name": "lilhx.js" },
-                            { "type": "file", "name": "s.js" }
-                        ]
-                    },
-                    { "type": "directory", "name": "others" }
-                ]
-            }
-        ]
-    }
-    ,
-    { "type": "report", "directories": 12, "files": 43 }
-]
+let __fetch_files__ = () => {
+    let file_api = "/dynamic/files.json";
+    fetch(file_api).
+        then(x => x.json()).
+        then(x => FILES_JSON = x).
+        finally(() => {
+            console.log("Loaded dynamic files")
+            modFileList(FILES_JSON[0], MODDED_LIST)
+            MODDED_LIST["/"] = MODDED_LIST["."]
+            MODDED_LIST["."] = null
+        }).
+        catch((e) => {
+            console.log("This happned", e)
+        })
+}
+
+__fetch_files__()
+
 
 var __cat__ = (...args) => {
     console.log("[cat]", ...args) 
@@ -171,9 +94,7 @@ let modFileList = (json, add_to) => {
     }
     return add_to[json.name]
 }
-modFileList(FILES[0], MODDED_LIST)
-MODDED_LIST["/"] = MODDED_LIST["."]
-MODDED_LIST["."] = null
+
 
 var __clear__ = (arg) => {
     document.querySelector(".terminal.st .body").innerHTML = ""
