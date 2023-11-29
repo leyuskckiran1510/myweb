@@ -78,19 +78,14 @@
 
     var focous_input = (self, ..._) => {
         self.querySelector("input").focus()
-        console.log(self.querySelector("input"))
-
     }
 
     let start_terminal = () => {
         let termBody = document.querySelector(".terminal.st .body")
-        // .addEventListener("keypress",(event)=>{
-        //         console.log(event)
-        //     })
         let child = document.createElement("div")
         let iput = document.createElement("input")
         child.className = "input"
-        child.innerText = "~$ "
+        child.innerText = "/" + DIR_CURRENT.filter(x => x != "/").join("/") + "$"
         child.append(iput)
         termBody.append(child)
         iput.focus()
@@ -104,21 +99,21 @@
                     message.className = "message"
                     prompt.className = "prompt"
                     let commandName = iput.value.toString().split(" ")[0]
-                    /*
-                            `__${commandName}__` to make sure no other function are decleared
-                            by same name
-                    */
+                    if (commandName == "?") {
+                        commandName = "help"
+                    }
                     if (typeof window[`__${commandName}__`] == "function") {
-                        message.innerHTML = window[`__${commandName}__`](iput.value)
+                        message.innerHTML = window[`__${commandName}__`]
+                            (...iput.value.toString().split(" ").slice(1).filter(x => x != " " && x.length > 0))
                     } else {
                         message.innerHTML = `<div class="command_error">${iput.value}: command not found</div>`
                     }
-                    prompt.innerText = `~$${iput.value}`
+                    prompt.innerText = `/${DIR_CURRENT.filter(x => x != "/").join("/")}$${iput.value}`
                     container.appendChild(prompt)
                     container.appendChild(message)
                     termBody.append(container)
                 }
-                if(document.querySelector(".terminal.st .body .input"))
+                if (document.querySelector(".terminal.st .body .input"))
                     document.querySelector(".terminal.st .body .input").outerHTML = ""
                 iput.value = ""
                 start_terminal()
@@ -173,8 +168,6 @@
                 }
             })
 
-        } else {
-            // console.log(`${path}${json.name}`)
         }
     }
 
@@ -207,7 +200,7 @@
         stripAttrinbutes(self)
         TASK_BAR.append(self)
         if (self.className.search("st") >= 0) {
-            CURRENT_DIR = {name:null,depth:0}
+            CURRENT_DIR = { name: null, depth: 0 }
             start_terminal()
         } else if (self.className.search('files') >= 0) {
             fetch_files()

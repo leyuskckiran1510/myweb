@@ -78,7 +78,7 @@ var assets = [
 ];
 
 self.addEventListener("install", (e) => {
-    console.log("[Service Worker] Install");
+    //console.log("[Service Worker] Install");
     var event = e;
     event.waitUntil((() => {
         return __awaiter(void 0, void 0, void 0, () => {
@@ -86,7 +86,7 @@ self.addEventListener("install", (e) => {
             return __generator(this, (_a) => {
                 switch (_a.label) {
                     case 0:
-                        console.log("[Service Worker] Caching all the assets");
+                        //console.log("[Service Worker] Caching all the assets");
                         return [4, caches.open(cacheName)];
                     case 1:
                         cache = _a.sent();
@@ -98,7 +98,7 @@ self.addEventListener("install", (e) => {
     })());
 });
 self.addEventListener("activate", (e) => {
-    console.log("[Service Worker] Activate");
+    //console.log("[Service Worker] Activate");
     var event = e;
     event.waitUntil((() => {
         return __awaiter(void 0, void 0, void 0, () => {
@@ -106,7 +106,7 @@ self.addEventListener("activate", (e) => {
             return __generator(this, (_c) => {
                 switch (_c.label) {
                     case 0:
-                        console.log("[Service Worker] Cleaning up all caches");
+                        //console.log("[Service Worker] Cleaning up all caches");
                         return [4, caches.keys()];
                     case 1:
                         keys = _c.sent();
@@ -140,7 +140,7 @@ self.addEventListener("fetch", (e) => {
             return __generator(this, (_a) => {
                 switch (_a.label) {
                     case 0:
-                        console.log("[Service Worker] Fetch " + event.request.url);
+                        //console.log("[Service Worker] Fetch " + event.request.url);
                         return [4, caches.open(cacheName)];
                     case 1:
                         cache = _a.sent();
@@ -148,7 +148,7 @@ self.addEventListener("fetch", (e) => {
                     case 2:
                         response = _a.sent();
                         if (!(response === undefined)) return [3, 4];
-                        console.log("[Service Worker] Response for " + event.request.url + " is not available in cache. Making an actual request...");
+                        //console.log("[Service Worker] Response for " + event.request.url + " is not available in cache. Making an actual request...");
                         return [4, fetch(event.request.url)];
                     case 3:
                         response = _a.sent();

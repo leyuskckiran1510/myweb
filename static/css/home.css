@@ -174,7 +174,6 @@ app .title {
     grid-column: 1/-1;
     grid-row: 2;
     display: grid;
-    flex-flow: column;
     grid-template-columns: repeat(auto-fill, 103px);
     grid-auto-rows: 100px;
 }
@@ -260,3 +259,11 @@ app .title {
 .terminal.st .body .message .command_error {
     color: #f53b3b;
 }
+
+.terminal.st .body .message {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+
+
